@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface IUser {
 
-    public Bool IsUserMatch(Long userID, char [] pin);
+    public Bool isUserMatch(Long userID, char [] pin);
 
-    public AbstractAccount GetAccount();
+    public AbstractAccount getAccount();
 
 }

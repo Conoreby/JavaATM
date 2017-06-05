@@ -20,13 +20,13 @@ public class User implements IUser {
     }
 
     @Override
-    public Bool IsUserMatch(Long userID, char[] pin) {
+    public Bool isUserMatch(Long userID, char[] pin) {
         throw new NotImplementedException();
     }
 
 
     @Override
-    public CheckingAccount GetAccount() {
+    public CheckingAccount getAccount() {
        return this.account;
     }
 }

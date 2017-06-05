@@ -1,5 +1,7 @@
 package com.conoreby.projects;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.math.BigDecimal;
 
 /**
@@ -8,16 +10,17 @@ import java.math.BigDecimal;
 public class CheckingAccount extends AbstractAccount {
 
     public CheckingAccount(BigDecimal initialDeposit) {
-        this.SetBalance(initialDeposit);
+        this.setBalance(initialDeposit);
     }
 
     @Override
-    public void Deposit(BigDecimal depositAmount) {
+    public void deposit(BigDecimal depositAmount) {
+        throw new NotImplementedException();
 
     }
 
     @Override
-    public void Withdraw(BigDecimal withdrawalAmount) {
-
+    public void withdraw(BigDecimal withdrawalAmount) {
+        throw new NotImplementedException();
     }
 }
