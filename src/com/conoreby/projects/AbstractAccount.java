@@ -21,8 +21,8 @@ public abstract class AbstractAccount {
         this.balance = balance;
     }
 
-    public abstract void deposit(BigDecimal depositAmount);
+    public abstract void deposit(BigDecimal depositAmount) throws Exception;
 
-    public abstract void withdraw(BigDecimal withdrawalAmount);
+    public abstract void withdraw(BigDecimal withdrawalAmount) throws Exception;
 }
 

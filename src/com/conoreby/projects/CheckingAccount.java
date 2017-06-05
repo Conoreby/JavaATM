@@ -1,7 +1,5 @@
 package com.conoreby.projects;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.math.BigDecimal;
 
 /**
@@ -14,13 +12,26 @@ public class CheckingAccount extends AbstractAccount {
     }
 
     @Override
-    public void deposit(BigDecimal depositAmount) {
-        throw new NotImplementedException();
+    public void deposit(BigDecimal depositAmount) throws NegativeDepositException {
+        /* compareTo returns -1, 0, or 1 as this BigDecimal is numerically less than, equal to, or greater than val. */
+        if (depositAmount.compareTo(BigDecimal.ZERO) < 0)
+            throw new NegativeDepositException();
+        BigDecimal currentBalance = this.getBalance();
+        BigDecimal newBalance = currentBalance.add(depositAmount);
+        this.setBalance(newBalance);
 
     }
 
     @Override
-    public void withdraw(BigDecimal withdrawalAmount) {
-        throw new NotImplementedException();
+    public void withdraw(BigDecimal withdrawalAmount) throws NegativeWithdrawalException, OverdraftException {
+        if (withdrawalAmount.compareTo(BigDecimal.ZERO) < 0)
+            throw new NegativeWithdrawalException();
+        BigDecimal currentBalance = this.getBalance();
+
+        if (currentBalance.compareTo(withdrawalAmount) < 0 )
+            throw new OverdraftException();
+
+        BigDecimal newBalance = currentBalance.subtract(withdrawalAmount);
+        this.setBalance(newBalance);
     }
 }
