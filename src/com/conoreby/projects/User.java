@@ -2,6 +2,8 @@ package com.conoreby.projects;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Arrays;
+
 
 /**
  * Created by conoreby on 6/4/17.
@@ -21,7 +23,11 @@ public class User implements IUser {
 
     @Override
     public Boolean isUserMatch(long userID, char[] pin) {
-        throw new NotImplementedException();
+        if (userID == this.userID && Arrays.equals(pin, this.pin)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
