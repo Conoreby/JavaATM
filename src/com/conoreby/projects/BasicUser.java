@@ -8,14 +8,14 @@ import java.util.Arrays;
 /**
  * Created by conoreby on 6/4/17.
  */
-public class User implements IUser {
+public class BasicUser implements IUser {
 
     /* Instance Variables */
     private AbstractAccount account;
     private long userID;
     private char[] pin;
 
-    public User (long userID, char[] pin, AbstractAccount account) {
+    public BasicUser(long userID, char[] pin, AbstractAccount account) {
        this.account = account;
        this.userID = userID;
        this.pin = pin;
@@ -28,6 +28,11 @@ public class User implements IUser {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public long getUserID() {
+        return this.userID;
     }
 
     @Override

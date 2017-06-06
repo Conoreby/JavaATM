@@ -7,6 +7,8 @@ public interface IUser {
 
     Boolean isUserMatch(long userID, char[] pin);
 
+    long getUserID();
+
     //This could be extended to a list of accounts
     AbstractAccount getAccount();
 
