@@ -1,9 +1,7 @@
 package com.conoreby.projects;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.List;
 
 /**
  * Created by conoreby on 6/4/17.
@@ -11,22 +9,23 @@ import java.util.List;
 public class User implements IUser {
 
     /* Instance Variables */
-    private CheckingAccount account;
-    private int userID;
+    private AbstractAccount account;
+    private long userID;
+    private char[] pin;
 
-    public User (int userID, CheckingAccount account) {
+    public User (long userID, char[] pin, AbstractAccount account) {
        this.account = account;
        this.userID = userID;
+       this.pin = pin;
     }
 
     @Override
-    public Bool isUserMatch(Long userID, char[] pin) {
+    public Boolean isUserMatch(long userID, char[] pin) {
         throw new NotImplementedException();
     }
 
-
     @Override
-    public CheckingAccount getAccount() {
+    public AbstractAccount getAccount() {
        return this.account;
     }
 }
