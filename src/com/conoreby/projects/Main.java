@@ -21,23 +21,35 @@ public class Main {
                                               + "Press 2 followed by the Enter key to make a Deposit. \n"
                                               + "Press 3 followed by the Enter key to make a Withdrawal. \n"
                                               + "Press 4 followed by the Enter key to Log Out. \n";
-    //TODO: Finish NUMBER ENTRY PROMPTS
-    private static final String DEPOSIT_PROMPT = "Please enter the amount you would like to deposit as";
+    private static final String DEPOSIT_PROMPT = "Please enter the amount you would like to deposit as a dollar amount "
+                                                + "and cent amount separated by a decimal. Such as 500.00 or 10.25";
+    private static final String WITHDRAWAL_PROMPT = "Please enter the amount you would like to withdraw as a dollar "
+                                                + "amount and cent amount separated by a decimal. Such as 500.00 or 10.25";
+    private static final String BALANCE_RESULT_MESSAGE = "Your current balance is:\n";
 
-    public static void main(String[] args) throws ConflictingUserDataException {
+
+    public static void main(String[] args) throws Exception {
         List<IUser> fakeUsers = createFakeUserList();
         atm = new ATM(fakeUsers);
         logoutUser = false;
+
+        startATMPromptLoop();
+    }
+
+    private static void startATMPromptLoop() throws Exception {
         while (true) {
             loginUser();
 
+            //Catch Exceptions and output user friendly message
             while(!logoutUser) {
                 performUserAction();
             }
+            logoutUser = false;
         }
+
     }
 
-    private static void performUserAction() throws UnauthorizedActionException {
+    private static void performUserAction() throws Exception {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println(ACTION_PROMPT);
             int choice = scanner.nextInt();
@@ -45,7 +57,7 @@ public class Main {
                 case 1: balanceAction();
                 case 2: depositAction();
                 case 3: withdrawalAction();
-                case 4: logoutAcion();
+                case 4: logoutAction();
                 default: break;
 
             }
@@ -53,17 +65,39 @@ public class Main {
 
     }
 
-    //TODO: Complete depositAction
-    private static void depositAction() {
+    private static void depositAction() throws Exception {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println(DEPO)
+            System.out.println(DEPOSIT_PROMPT);
+
+            BigDecimal depositAmount = scanner.nextBigDecimal();
+            atm.depositToCurrentUser(depositAmount);
+
+            //Output the new balance
+            balanceAction();
         }
-        atm.depositToCurrentUser();
+    }
+
+    private static void withdrawalAction() throws Exception {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println(WITHDRAWAL_PROMPT);
+
+            BigDecimal withdrawalAmount = scanner.nextBigDecimal();
+            atm.withdrawFromCurrentUser(withdrawalAmount);
+
+            balanceAction();
+        }
+    }
+
+    private static void logoutAction() {
+        atm.logoutUser();
+        logoutUser = true;
     }
 
     private static void balanceAction() throws UnauthorizedActionException {
         BigDecimal currentBalance = atm.getBalanceFromCurrentUser();
         String balanceString = NumberFormat.getCurrencyInstance(Locale.US).format(currentBalance);
+
+        System.out.println(BALANCE_RESULT_MESSAGE);
         System.out.println(balanceString);
     }
 
